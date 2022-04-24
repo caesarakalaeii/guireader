@@ -8,7 +8,7 @@ Download the code
 Open in the IDE of you choice (IntelliJ is preferred by me)
 Only File you need to edit is Main.java
 In line 65 edit the String to math the location and file which you want to be played  
-In line 105 edit the parameters:    
+In line 105 edit the parameters, best is to screenshot the complete screen and look the pixel values up in a image editor:    
 First is the x coordinate of the object, x goes from left to right (Multimonitors are possible to use but they are a bit wierd)  
 Second is the y coordinate, y goes from up to down  
 X and Y coordinates are attributed to the top left pixel of your bar, set the object one pixel more to the right to get accurate 0% readings  
@@ -29,3 +29,6 @@ Re-add config file via JSON
 Make GUI more intuitive  
 More logic to improve usability  
 FileChooser to load config  
+
+Feel free to msg me on discord Caesar#4967  
+If you want to use or modify this code be sure to credit me.
