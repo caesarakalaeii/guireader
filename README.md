@@ -1,5 +1,5 @@
 # guireader
-gui reader used for reading GUIs without interfering with memory access
+gui reader used for reading GUIs without interfering with memory access  
 Currently, no config file, no variable pixelreads, no variable .mp3
 very basic prototype
 
