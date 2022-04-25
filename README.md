@@ -29,7 +29,7 @@ Re-add config file via JSON
 Make GUI more intuitive  
 More logic to improve usability  
 FileChooser to load config  
-Second Bar to handle Inventory opening
+Second Bar to handle Inventory opening  
 Make trigger more resilient, to avoid accidental triggers
 
 Feel free to msg me on discord Caesar#4967  

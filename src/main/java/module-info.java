@@ -11,6 +11,6 @@ module com.example.guireadergui {
     requires javafx.swing;
     requires javafx.media;
 
-    opens com.example.guireadergui to javafx.fxml;
-    exports com.example.guireadergui;
+    opens com.guireadergui to javafx.fxml;
+    exports com.guireadergui;
 }
