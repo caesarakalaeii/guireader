@@ -1,11 +1,10 @@
 # guireader
-gui reader used for reading GUIs without interfering with memory access  
-Currently, no config file, no variable pixelreads, no variable .mp3
-very basic prototype
+gui reader used to read GUIs without interfering with memory access  
 
-Quick start guide:  DEPRECATED, will add new instructions soon
-Download the code
-Open in the IDE of you choice (IntelliJ is preferred by me)
+
+Quick start guide:  DEPRECATED, will add new instructions soon  
+Download the code  
+Open in the IDE of you choice (IntelliJ is preferred by me)  
 Only File you need to edit is Main.java
 In line 65 edit the String to math the location and file which you want to be played  
 In line 105 edit the parameters, best is to screenshot the complete screen and look the pixel values up in a image editor:    
@@ -24,13 +23,13 @@ After it played, the program wont't play the .mp3 unless the reset button was pl
 
 
 TODO:  
-✓ Add variable coords, pref through drag & drop  (Not drag and drop but hey)
-✓ Make GUI more intuitive  (better? yeah, good? no)
-✓ More logic to improve usability  
-✓ Second Bar to handle Inventory opening  (as many as you like baby)
-Re-add config file via JSON  
+✓ Add variable coords, pref through drag & drop  (Not drag and drop but hey)  
+✓ Make GUI more intuitive  (better? yeah, good? no)  
+✓ More logic to improve usability    
+✓ Second Bar to handle Inventory opening  (as many as you like baby)  
+Re-add config file via JSON    
 FileChooser to load config  
-Make trigger more resilient, to avoid accidental triggers
+Make trigger more resilient, to avoid accidental triggers  
 
 Feel free to msg me on discord Caesar#4967  
 If you want to use or modify this code be sure to credit me.
