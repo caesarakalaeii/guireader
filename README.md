@@ -24,12 +24,12 @@ After it played, the program wont't play the .mp3 unless the reset button was pl
 
 
 TODO:  
-Add variable coords, pref through drag & drop  
+✓ Add variable coords, pref through drag & drop  (Not drag and drop but hey)
+✓ Make GUI more intuitive  (better? yeah, good? no)
+✓ More logic to improve usability  
+✓ Second Bar to handle Inventory opening  (as many as you like baby)
 Re-add config file via JSON  
-Make GUI more intuitive  
-More logic to improve usability  
 FileChooser to load config  
-Second Bar to handle Inventory opening  
 Make trigger more resilient, to avoid accidental triggers
 
 Feel free to msg me on discord Caesar#4967  
