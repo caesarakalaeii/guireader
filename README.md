@@ -3,7 +3,7 @@ gui reader used for reading GUIs without interfering with memory access
 Currently, no config file, no variable pixelreads, no variable .mp3
 very basic prototype
 
-Quick start guide:  
+Quick start guide:  DEPRECATED, will add new instructions soon
 Download the code
 Open in the IDE of you choice (IntelliJ is preferred by me)
 Only File you need to edit is Main.java
