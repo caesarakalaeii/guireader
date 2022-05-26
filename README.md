@@ -32,7 +32,7 @@ TODO:
 ✓ Make GUI more intuitive  (better? yeah, good? no)  
 ✓ More logic to improve usability    
 ✓ Second Bar to handle Inventory opening  (as many as you like baby)  
-implement an actual Logger
+implement an actual Logger  
 Re-add config file via JSON    
 FileChooser to load config  
 Make trigger more resilient, to avoid accidental triggers  
