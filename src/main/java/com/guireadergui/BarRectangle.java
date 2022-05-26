@@ -6,11 +6,13 @@ import javafx.scene.shape.Rectangle;
 
 
 public class BarRectangle extends Rectangle {
-    IntegerProperty resolution;
+    private IntegerProperty resolution;
+    private IntegerProperty color;
 
     public BarRectangle(int x, int y, int width, int height){
         super(x, y, width, height);
         this.resolution = new SimpleIntegerProperty();
+        this.color = new SimpleIntegerProperty();
 
 
     }
@@ -23,7 +25,11 @@ public class BarRectangle extends Rectangle {
         return resolution;
     }
 
-
-
+    public int getColor() {
+        return color.get();
+    }
+    public IntegerProperty getColorProperty(){
+        return color;
+    }
 }
 

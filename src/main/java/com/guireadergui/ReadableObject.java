@@ -2,16 +2,16 @@ package com.guireadergui;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ReadableObject extends CaptureScreen {
     private final ArrayList<Probe> probes;
     private BufferedImage img;
     private int[] onVal = new int[3];
-    private int ofVal;
     private int resiliance;
 
 
-    public ReadableObject(int x, int y, int width, int height, int resilience){
+    protected ReadableObject(int x, int y, int width, int height, int resilience){
         super(x,y,width,height);
         probes = new ArrayList<>();
         img = super.getImg();
@@ -47,7 +47,7 @@ public abstract class ReadableObject extends CaptureScreen {
         return onVal;
     }
 
-    public ArrayList<Probe> getProbes() {
+    public List<Probe> getProbes() {
         return probes;
     }
 
@@ -69,15 +69,11 @@ public abstract class ReadableObject extends CaptureScreen {
         this.onVal = getProbes().get(0).getRGBArray();
     }
 
-    public ArrayList<BufferedImage> getImages() {
-        ArrayList<BufferedImage> arr = new ArrayList();
+    public List<BufferedImage> getImages() {
+        ArrayList<BufferedImage> arr = new ArrayList<>();
         arr.add(img);
         return arr;
     }
 
-    @Override
-    protected Object call() throws Exception{
-        super.call();
-        return null;
-    }
+
 }

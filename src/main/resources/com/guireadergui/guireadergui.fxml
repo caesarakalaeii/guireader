@@ -113,6 +113,21 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="104.0" text="R">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="103.0" text="G">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="103.0" text="B">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
                         <ChoiceBox fx:id="logicType" prefWidth="150.0" />
                         <ChoiceBox fx:id="executionerChoice" prefWidth="150.0" />
                         <Button fx:id="setButton" mnemonicParsing="false" onAction="#setValues" prefHeight="25.0" prefWidth="145.0" text="New Reader" />
@@ -127,7 +142,10 @@
                         <Spinner fx:id="heightField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="23.0" prefWidth="85.0" />
                         <Spinner fx:id="resField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="20.0" prefWidth="85.0" />
                         <Spinner fx:id="resuField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="24.0" prefWidth="85.0" />
-                        <Spinner fx:id="threshold" editable="true" />
+                        <Spinner fx:id="threshold" editable="true" prefHeight="31.0" prefWidth="85.0" />
+                        <Spinner fx:id="rSpinner" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="28.0" prefWidth="85.0" />
+                        <Spinner fx:id="gSpinner" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="30.0" prefWidth="85.0" />
+                        <Spinner fx:id="bSpinner" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" />
                         <ChoiceBox fx:id="logicThreshold" prefHeight="30.0" prefWidth="85.0" />
                         <Button fx:id="setExecutionerButton" mnemonicParsing="false" onAction="#setExecutioner" prefHeight="25.0" prefWidth="86.0" text="Set Alert" />
                      </children>

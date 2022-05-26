@@ -5,17 +5,17 @@ import java.io.File;
 public abstract class Executioner {
     boolean triggered;
 
-    public Executioner() {
+    protected Executioner() {
         this.triggered = false;
 
     }
 
     public void trigger(){
-        triggered = true;
+        this.triggered = true;
     }
 
     public void reset(){
-        triggered = false;
+        this.triggered = false;
     }
     public void setFile(File file){
 

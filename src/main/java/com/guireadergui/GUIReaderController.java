@@ -1,9 +1,5 @@
 package com.guireadergui;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.concurrent.Worker;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,14 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -70,13 +61,19 @@ public class GUIReaderController {
     @FXML
     private VBox controlVBox;
     @FXML
-    private ChoiceBox logicType;
+    private ChoiceBox<String> logicType;
     @FXML
-    private ChoiceBox logicThreshold;
+    private ChoiceBox<String> logicThreshold;
     @FXML
     private Button resetButton;
     @FXML
-    private ChoiceBox executionerChoice;
+    private ChoiceBox<String> executionerChoice;
+    @FXML
+    private Spinner<Integer> rSpinner;
+    @FXML
+    private Spinner<Integer> gSpinner;
+    @FXML
+    private Spinner<Integer> bSpinner;
 
 
 
@@ -93,9 +90,12 @@ public class GUIReaderController {
     private SpinnerValueFactory<Integer> resFieldValueFactory;
     private SpinnerValueFactory<Integer> resuFieldValueFactory;
     private SpinnerValueFactory<Integer> thresFieldValueFactory;
+    private SpinnerValueFactory<Integer> rValueFactory;
+    private SpinnerValueFactory<Integer> gValueFactory;
+    private SpinnerValueFactory<Integer> bValueFactory;
     private Image screen;
-    private ArrayList<BarRectangle> barRectangles;
-    private ArrayList<ImageView> imv;
+    private List<BarRectangle> barRectangles;
+    private List<ImageView> imv;
     private Logic logic;
 
     private File file;
@@ -110,9 +110,12 @@ public class GUIReaderController {
         resFieldValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 200, 10);
         resuFieldValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 200, 50);
         thresFieldValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 50);
+        rValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 255, 255);
+        gValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 255, 0);
+        bValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 255, 0);
 
-        barRectangles = new ArrayList();
-        imv = new ArrayList();
+        barRectangles = new ArrayList<>();
+        imv = new ArrayList<>();
 
         logic = null;
 
@@ -126,10 +129,9 @@ public class GUIReaderController {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
         fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showOpenDialog(stage);
-        if(file != null) {
-            screen = new Image(file.toURI().toString());
-
+        File screenfile = fileChooser.showOpenDialog(stage);
+        if(screenfile != null) {
+            screen = new Image(screenfile.toURI().toString());
             imv4.setImage(screen);
         }
     }
@@ -145,7 +147,7 @@ public class GUIReaderController {
 
     @FXML
     private void setValues(){
-        if(setButton.getText() == "Set") {
+        if(setButton.getText().equals("Set")) {
             setButton.setText("New");
             BarRectangle barRectangle = barRectangles.get(barRectangles.size() - 1);
             barRectangle.heightProperty().unbind();
@@ -178,6 +180,9 @@ public class GUIReaderController {
         resField.setValueFactory(resFieldValueFactory);
         resuField.setValueFactory(resuFieldValueFactory);
         threshold.setValueFactory(thresFieldValueFactory);
+        rSpinner.setValueFactory(rValueFactory);
+        gSpinner.setValueFactory(gValueFactory);
+        bSpinner.setValueFactory(bValueFactory);
         createNewRectangle();
         setButton.setText("Set");
 
@@ -200,23 +205,26 @@ public class GUIReaderController {
 
     public void drawRect(){
         BufferedImage tempscreen = SwingFXUtils.fromFXImage(screen, null);
+
         for(BarRectangle barRectangle : barRectangles) {
             int height = (int) barRectangle.getHeight();
             int width = (int) barRectangle.getWidth();
             int x = (int) barRectangle.getX();
             int y = (int) barRectangle.getY();
             int res = barRectangle.getResolution();
+            int[] rgbArr ={rSpinner.getValue(),gSpinner.getValue(),bSpinner.getValue()};
+            int color = Probe.toRGBint(rgbArr);
 
 
 
             for(int i = 0; i<width;i++) {
-                tempscreen.setRGB(x + i, y, 100);
-                tempscreen.setRGB(x + i, y + height, 100);
+                tempscreen.setRGB(x + i, y, color);
+                tempscreen.setRGB(x + i, y + height, color);
             }
             for(int i =0; i<height;i++) {
 
-                tempscreen.setRGB(x, y + i, 100);
-                tempscreen.setRGB(x + width, y + i, 100);
+                tempscreen.setRGB(x, y + i, color);
+                tempscreen.setRGB(x + width, y + i, color);
             }
 
 
@@ -225,14 +233,14 @@ public class GUIReaderController {
                 int interval = height / res;
 
                 for (int i = 0; i < res; i++) {
-                    tempscreen.setRGB(x + middle, y + (interval * i), 100);
+                    tempscreen.setRGB(x + middle, y + (interval * i), color);
                 }
             }  //in case of vertical bar
             if (height < width) {
                 int middle = height / 2;
                 int interval = width / res;
                 for (int i = 0; i < res; i++) {
-                    tempscreen.setRGB(x + (interval * i), y + middle, 100);
+                    tempscreen.setRGB(x + (interval * i), y + middle, color);
                 }
 
             }
@@ -257,7 +265,7 @@ public class GUIReaderController {
     @FXML
     private void updateAll(){
 
-        if(barRectangles.size() > 0) {
+        if(!barRectangles.isEmpty()) {
             drawRect();
         }
     }
@@ -430,19 +438,19 @@ public class GUIReaderController {
         this.controlVBox = controlVBox;
     }
 
-    public ChoiceBox getLogicType() {
+    public ChoiceBox<String> getLogicType() {
         return logicType;
     }
 
-    public void setLogicType(ChoiceBox logicType) {
+    public void setLogicType(ChoiceBox<String> logicType) {
         this.logicType = logicType;
     }
 
-    public ChoiceBox getLogicThreshold() {
+    public ChoiceBox<String> getLogicThreshold() {
         return logicThreshold;
     }
 
-    public void setLogicThreshold(ChoiceBox logicThreshold) {
+    public void setLogicThreshold(ChoiceBox<String> logicThreshold) {
         this.logicThreshold = logicThreshold;
     }
 
@@ -454,11 +462,11 @@ public class GUIReaderController {
         this.resetButton = resetButton;
     }
 
-    public ChoiceBox getExecutionerChoice() {
+    public ChoiceBox<String> getExecutionerChoice() {
         return executionerChoice;
     }
 
-    public void setExecutionerChoice(ChoiceBox executionerChoice) {
+    public void setExecutionerChoice(ChoiceBox<String> executionerChoice) {
         this.executionerChoice = executionerChoice;
     }
 
@@ -530,19 +538,19 @@ public class GUIReaderController {
         this.screen = screen;
     }
 
-    public ArrayList<BarRectangle> getBarRectangles() {
+    public List<BarRectangle> getBarRectangles() {
         return barRectangles;
     }
 
-    public void setBarRectangles(ArrayList<BarRectangle> barRectangles) {
+    public void setBarRectangles(List<BarRectangle> barRectangles) {
         this.barRectangles = barRectangles;
     }
 
-    public ArrayList<ImageView> getImv() {
+    public List<ImageView> getImv() {
         return imv;
     }
 
-    public void setImv(ArrayList<ImageView> imv) {
+    public void setImv(List<ImageView> imv) {
         this.imv = imv;
     }
 

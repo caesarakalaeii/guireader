@@ -1,13 +1,9 @@
 package com.guireadergui;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 public class ReadableNumber extends ReadableObject{
     ArrayList<Probe> probes;
-    private final int onVal;
-    private int ofVal;
 
     public ReadableNumber(int x, int y, int width, int height, int resilience){
         super(x, y, width, height, resilience);
@@ -19,7 +15,7 @@ public class ReadableNumber extends ReadableObject{
         probes.add(new Probe(2*x/3, y));                             // 4   |
         probes.add(new Probe(2*x/3, y+width));                     // |   5
         probes.add(new Probe(x,width/2));                            // --6--
-        onVal = probes.get(0).getPixelValue();
+        super.setOnVal(probes.get(0).getPixelValueArr());
 
     }
     public ReadableNumber(int[] args){
@@ -33,9 +29,5 @@ public class ReadableNumber extends ReadableObject{
         updateProbes();
     }
 
-    @Override
-    protected Object call() throws Exception {
-        Thread.sleep(100);
-        return null;
-    }
+
 }

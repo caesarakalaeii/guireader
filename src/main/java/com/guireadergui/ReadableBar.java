@@ -49,13 +49,6 @@ public class ReadableBar extends ReadableObject{
         updateProbes();
     }
 
-    @Override
-    protected Object call() throws Exception {
-        while(!this.isCancelled()){
-            updateProbes();
-            Thread.sleep(100);
-        }
-        return null;
-    }
+
 }
 

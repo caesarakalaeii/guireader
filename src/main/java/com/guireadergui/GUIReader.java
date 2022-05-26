@@ -1,32 +1,16 @@
 package com.guireadergui;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GUIReader  extends Application {
     Stage stage;
@@ -67,13 +51,13 @@ public class GUIReader  extends Application {
         stage.minHeightProperty().bind(cont.gethBoxAll().heightProperty());
         cont.getLogicType().setItems(FXCollections.observableArrayList(
                 "Percentage", "Number(Not Working)"));
-        cont.getLogicType().getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> logicTypeEnum = logicTypeEnumArr[new_value.intValue()]);
+        cont.getLogicType().getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) -> logicTypeEnum = logicTypeEnumArr[newValue.intValue()]);
         cont.getLogicThreshold().setItems(FXCollections.observableArrayList("Equals", "Smaller", "Greater"));
-        cont.getLogicThreshold().getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> logicEnum = logicEnumArr[new_value.intValue()]);
+        cont.getLogicThreshold().getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) -> logicEnum = logicEnumArr[newValue.intValue()]);
         cont.getExecutionerChoice().setItems(FXCollections.observableArrayList(
                 "Sound"
         ));
-        cont.getExecutionerChoice().getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> execEnum = execEnumArr[new_value.intValue()]);
+        cont.getExecutionerChoice().getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) -> execEnum = execEnumArr[newValue.intValue()]);
 
 
         stage.setTitle("GUI-Reader");
@@ -104,13 +88,14 @@ public class GUIReader  extends Application {
     public void startSlideShow() {
         slideShow = new Task<>() {
             @Override
-            protected Void call() {
+            protected Void call() throws InterruptedException {
                 int i = 1;
                 while (!stop) {
                     try {
                         Thread.sleep(10);
                         updateMessage(i + ".png");
                     } catch (Exception e) {
+                        throw e;
                     }
                     i++;
                 }
@@ -124,9 +109,6 @@ public class GUIReader  extends Application {
     @Override
     public void stop(){
         stop=true;
-        for(Manager man : manager) {
-            man.stop();
-        }
 
     }
 

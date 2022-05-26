@@ -3,9 +3,10 @@ package com.guireadergui;
 import java.awt.image.BufferedImage;
 import java.lang.invoke.WrongMethodTypeException;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Manager {
-    ArrayList<LogicListener> l = new ArrayList();
+    List<LogicListener> l = new ArrayList<>();
     ReadableObject ref;
 
     public void attach(LogicListener listner){
@@ -21,11 +22,11 @@ public abstract class Manager {
             list.update();
         }
     }
-    public ArrayList<LogicListener> getList(){
+    public List<LogicListener> getList(){
         return l;
     }
 
-    public void setList(ArrayList<LogicListener> l) {
+    public void setList(List<LogicListener> l) {
         this.l = l;
     }
 
@@ -46,7 +47,7 @@ public abstract class Manager {
         throw new WrongMethodTypeException("No Logic with this method; getPercentage()");
     }
 
-    public ArrayList<Probe> getProbes(){
+    public List<Probe> getProbes(){
         return ref.getProbes();
     }
 
@@ -55,7 +56,4 @@ public abstract class Manager {
         return ref.getImg();
     }
 
-    public void stop(){
-        ref.cancel();
-    }
 }
