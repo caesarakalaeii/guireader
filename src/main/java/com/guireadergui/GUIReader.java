@@ -33,11 +33,16 @@ public class GUIReader  extends Application {
 
     Task<Void> slideShow;
     boolean stop;
-    MediaPlayer media;
-    boolean playedMedia;
     ArrayList<ReadableObjManager> manager;
     Scene scene;
     GUIReaderController cont;
+    Executioner exec;
+    LogicType[] logicTypeEnumArr = {LogicType.PERCENTAGE, LogicType.NUMBER, LogicType.POINT};
+    LogicEnum[] logicEnumArr = {LogicEnum.EQUAL,LogicEnum.SMALLER,LogicEnum.GREATER};
+    LogicType logicTypeEnum ;
+    LogicEnum logicEnum ;
+    ExecEnum execEnum;
+    ExecEnum[] execEnumArr = {ExecEnum.SOUND};
 
 
 
@@ -55,27 +60,23 @@ public class GUIReader  extends Application {
 
 
         startSlideShow();
-        scene = new Scene(fxmlLoader.load(), 320, 240);
+        scene = new Scene(fxmlLoader.load());
         cont = fxmlLoader.getController();
         cont.setReader(this);
-        stage.minWidthProperty().bind(cont.hBoxAll.widthProperty());
-        stage.minHeightProperty().bind(cont.hBoxAll.heightProperty());
-        cont.logicType.setItems(FXCollections.observableArrayList(
+        stage.minWidthProperty().bind(cont.gethBoxAll().widthProperty());
+        stage.minHeightProperty().bind(cont.gethBoxAll().heightProperty());
+        cont.getLogicType().setItems(FXCollections.observableArrayList(
                 "Percentage", "Number(Not Working)"));
-        cont.logicType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>(){
-            public void changed(ObservableValue ov, Number value, Number new_value){
-                cont.logicTypeEnum = cont.logicTypeEnumArr[new_value.intValue()];
-            }
-        });
-        cont.logicThreshold.setItems(FXCollections.observableArrayList("Equals", "Smaller", "Greater"));
-        cont.logicType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>(){
-            public void changed(ObservableValue ov, Number value, Number new_value){
-                cont.logicEnum = cont.logicEnumArr[new_value.intValue()];
-            }
-        });
+        cont.getLogicType().getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> logicTypeEnum = logicTypeEnumArr[new_value.intValue()]);
+        cont.getLogicThreshold().setItems(FXCollections.observableArrayList("Equals", "Smaller", "Greater"));
+        cont.getLogicThreshold().getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> logicEnum = logicEnumArr[new_value.intValue()]);
+        cont.getExecutionerChoice().setItems(FXCollections.observableArrayList(
+                "Sound"
+        ));
+        cont.getExecutionerChoice().getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> execEnum = execEnumArr[new_value.intValue()]);
 
 
-        stage.setTitle("Hello!");
+        stage.setTitle("GUI-Reader");
         stage.setScene(scene);
         stage.show();
 
@@ -88,10 +89,10 @@ public class GUIReader  extends Application {
                 for(Manager man : manager) {
                     BufferedImage img = man.getImage();
 
-                    cont.imv.get(manager.indexOf(man)).setImage(SwingFXUtils.toFXImage(img, null));
+                    cont.getImv().get(manager.indexOf(man)).setImage(SwingFXUtils.toFXImage(img, null));
 
-                    if (cont.logic.compute()) {
-                        playsound();
+                    if (cont.getLogic().compute()) {
+                        exec.trigger();
                     }
                 }
             });
@@ -107,7 +108,7 @@ public class GUIReader  extends Application {
                 int i = 1;
                 while (!stop) {
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(10);
                         updateMessage(i + ".png");
                     } catch (Exception e) {
                     }
@@ -129,27 +130,33 @@ public class GUIReader  extends Application {
 
     }
 
-    public void playsound(){
 
-        if(!playedMedia && media != null){
-            playedMedia = true;
-            media.play();
-        }
-        else{
-            System.out.println("Already played");
-
-        }
-
-
-
-    }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public void resetSound(){
-        playedMedia = false;
+
+
+    public ExecEnum getExecEnum() {
+        return execEnum;
+    }
+
+    public Executioner getExec() {
+        return exec;
+    }
+
+    public void setExec() {
+
+        this.exec=ExecutionerFactory.newInstance(execEnum,exec);
+    }
+
+    public LogicType getLogicTypeEnum() {
+        return logicTypeEnum;
+    }
+
+    public LogicEnum getLogicEnum() {
+        return logicEnum;
     }
 }
 

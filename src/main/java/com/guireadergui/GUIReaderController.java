@@ -28,75 +28,78 @@ import java.util.List;
 
 public class GUIReaderController {
     @FXML
-    Stage stage;
+    private Stage stage;
     @FXML
-    VBox imageVBox;
+    private VBox imageVBox;
     @FXML
-    ImageView imv4;
+    private ImageView imv4;
     @FXML
-    Label yLabel;
+    private Label yLabel;
     @FXML
-    Label xLabel;
+    private Label xLabel;
     @FXML
-    Label wLabel;
+    private Label wLabel;
     @FXML
-    Label hLabel;
+    private Label hLabel;
     @FXML
-    Label rLabel;
+    private Label rLabel;
     @FXML
-    Label resLabel;
+    private Label resLabel;
     @FXML
-    Label thrLabel;
+    private Label thrLabel;
     @FXML
-    Spinner<Integer> threshold;
+    private Spinner<Integer> threshold;
 
     @FXML
-    Spinner<Integer> heightField;
+    private Spinner<Integer> heightField;
 
     @FXML
-    Spinner<Integer> widthField;
+    private Spinner<Integer> widthField;
     @FXML
-    Spinner<Integer> resField;
+    private Spinner<Integer> resField;
     @FXML
-    Spinner<Integer> resuField;
+    private Spinner<Integer> resuField;
     @FXML
-    Spinner<Integer> xField;
+    private Spinner<Integer> xField;
     @FXML
-    Spinner<Integer> yField;
+    private Spinner<Integer> yField;
     @FXML
-    Button setButton;
+    private Button setButton;
     @FXML
-    HBox hBoxAll;
+    private HBox hBoxAll;
     @FXML
-    VBox controlVBox;
+    private VBox controlVBox;
     @FXML
-    ChoiceBox logicType;
+    private ChoiceBox logicType;
     @FXML
-    ChoiceBox logicThreshold;
+    private ChoiceBox logicThreshold;
+    @FXML
+    private Button resetButton;
+    @FXML
+    private ChoiceBox executionerChoice;
 
 
 
 
 
 
-    GUIReader reader;
 
-    SpinnerValueFactory<Integer> xValueFactory;
-    SpinnerValueFactory<Integer> yValueFactory;
-    SpinnerValueFactory<Integer> widthValueFactory;
-    SpinnerValueFactory<Integer> heightValueFactory;
-    SpinnerValueFactory<Integer> resFieldValueFactory;
-    SpinnerValueFactory<Integer> resuFieldValueFactory;
-    SpinnerValueFactory<Integer> thresFieldValueFactory;
-    Image screen;
-    ArrayList<BarRectangle> barRectangles;
-    ArrayList<ImageView> imv;
-    Logic logic;
-    LogicType[] logicTypeEnumArr = {LogicType.PERCENTAGE, LogicType.NUMBER, LogicType.POINT};
-    LogicEnum[] logicEnumArr = {LogicEnum.EQUAL,LogicEnum.SMALLER,LogicEnum.GREATER};
-    LogicType logicTypeEnum ;
-    LogicEnum logicEnum ;
-    Thread t;
+    private GUIReader reader;
+
+    private SpinnerValueFactory<Integer> xValueFactory;
+    private SpinnerValueFactory<Integer> yValueFactory;
+    private SpinnerValueFactory<Integer> widthValueFactory;
+    private SpinnerValueFactory<Integer> heightValueFactory;
+    private SpinnerValueFactory<Integer> resFieldValueFactory;
+    private SpinnerValueFactory<Integer> resuFieldValueFactory;
+    private SpinnerValueFactory<Integer> thresFieldValueFactory;
+    private Image screen;
+    private ArrayList<BarRectangle> barRectangles;
+    private ArrayList<ImageView> imv;
+    private Logic logic;
+
+    private File file;
+
 
 
     public GUIReaderController (){
@@ -136,16 +139,14 @@ public class GUIReaderController {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("MP3 files (*.mp3)", "*.mp3");
         fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showOpenDialog(stage);
-        if (file !=null) {
-            Media sound = new Media(file.toURI().toString());
-            reader.media = new MediaPlayer(sound);
-        }
+        file = fileChooser.showOpenDialog(stage);
+
     }
 
     @FXML
     private void setValues(){
         if(setButton.getText() == "Set") {
+            setButton.setText("New");
             BarRectangle barRectangle = barRectangles.get(barRectangles.size() - 1);
             barRectangle.heightProperty().unbind();
             barRectangle.widthProperty().unbind();
@@ -167,10 +168,8 @@ public class GUIReaderController {
             imv.get(imv.size() - 1).setImage(SwingFXUtils.toFXImage(bar.getImg(), null));
             imageVBox.getChildren().add(imv.get(imv.size() - 1));
 
-            logic = LogicFactory.newInstance(logicTypeEnum, logicEnum, man, threshold.getValue(), logic);
-
-            setButton.setText("New");
-            reader.startSlideShow();
+            logic = LogicFactory.newInstance(reader.getLogicTypeEnum(), reader.getLogicEnum(), man, threshold.getValue(), logic);
+            return;
 
         }
         xField.setValueFactory(xValueFactory);
@@ -248,7 +247,7 @@ public class GUIReaderController {
 
     @FXML
     private void resetSound(){
-        reader.resetSound();
+            reader.getExec().reset();
     }
 
     public void setReader(GUIReader reader){
@@ -264,5 +263,304 @@ public class GUIReaderController {
         }
     }
 
+    @FXML
+    private void setExecutioner(){
+        reader.setExec();
+        reader.getExec().setFile(file);
+
+    }
+
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public VBox getImageVBox() {
+        return imageVBox;
+    }
+
+    public void setImageVBox(VBox imageVBox) {
+        this.imageVBox = imageVBox;
+    }
+
+    public ImageView getImv4() {
+        return imv4;
+    }
+
+    public void setImv4(ImageView imv4) {
+        this.imv4 = imv4;
+    }
+
+    public Label getyLabel() {
+        return yLabel;
+    }
+
+    public void setyLabel(Label yLabel) {
+        this.yLabel = yLabel;
+    }
+
+    public Label getxLabel() {
+        return xLabel;
+    }
+
+    public void setxLabel(Label xLabel) {
+        this.xLabel = xLabel;
+    }
+
+    public Label getwLabel() {
+        return wLabel;
+    }
+
+    public void setwLabel(Label wLabel) {
+        this.wLabel = wLabel;
+    }
+
+    public Label gethLabel() {
+        return hLabel;
+    }
+
+    public void sethLabel(Label hLabel) {
+        this.hLabel = hLabel;
+    }
+
+    public Label getrLabel() {
+        return rLabel;
+    }
+
+    public void setrLabel(Label rLabel) {
+        this.rLabel = rLabel;
+    }
+
+    public Label getResLabel() {
+        return resLabel;
+    }
+
+    public void setResLabel(Label resLabel) {
+        this.resLabel = resLabel;
+    }
+
+    public Label getThrLabel() {
+        return thrLabel;
+    }
+
+    public void setThrLabel(Label thrLabel) {
+        this.thrLabel = thrLabel;
+    }
+
+    public Spinner<Integer> getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Spinner<Integer> threshold) {
+        this.threshold = threshold;
+    }
+
+    public Spinner<Integer> getHeightField() {
+        return heightField;
+    }
+
+    public void setHeightField(Spinner<Integer> heightField) {
+        this.heightField = heightField;
+    }
+
+    public Spinner<Integer> getWidthField() {
+        return widthField;
+    }
+
+    public void setWidthField(Spinner<Integer> widthField) {
+        this.widthField = widthField;
+    }
+
+    public Spinner<Integer> getResField() {
+        return resField;
+    }
+
+    public void setResField(Spinner<Integer> resField) {
+        this.resField = resField;
+    }
+
+    public Spinner<Integer> getResuField() {
+        return resuField;
+    }
+
+    public void setResuField(Spinner<Integer> resuField) {
+        this.resuField = resuField;
+    }
+
+    public Spinner<Integer> getxField() {
+        return xField;
+    }
+
+    public void setxField(Spinner<Integer> xField) {
+        this.xField = xField;
+    }
+
+    public Spinner<Integer> getyField() {
+        return yField;
+    }
+
+    public void setyField(Spinner<Integer> yField) {
+        this.yField = yField;
+    }
+
+    public Button getSetButton() {
+        return setButton;
+    }
+
+    public void setSetButton(Button setButton) {
+        this.setButton = setButton;
+    }
+
+    public HBox gethBoxAll() {
+        return hBoxAll;
+    }
+
+    public void sethBoxAll(HBox hBoxAll) {
+        this.hBoxAll = hBoxAll;
+    }
+
+    public VBox getControlVBox() {
+        return controlVBox;
+    }
+
+    public void setControlVBox(VBox controlVBox) {
+        this.controlVBox = controlVBox;
+    }
+
+    public ChoiceBox getLogicType() {
+        return logicType;
+    }
+
+    public void setLogicType(ChoiceBox logicType) {
+        this.logicType = logicType;
+    }
+
+    public ChoiceBox getLogicThreshold() {
+        return logicThreshold;
+    }
+
+    public void setLogicThreshold(ChoiceBox logicThreshold) {
+        this.logicThreshold = logicThreshold;
+    }
+
+    public Button getResetButton() {
+        return resetButton;
+    }
+
+    public void setResetButton(Button resetButton) {
+        this.resetButton = resetButton;
+    }
+
+    public ChoiceBox getExecutionerChoice() {
+        return executionerChoice;
+    }
+
+    public void setExecutionerChoice(ChoiceBox executionerChoice) {
+        this.executionerChoice = executionerChoice;
+    }
+
+    public GUIReader getReader() {
+        return reader;
+    }
+
+    public SpinnerValueFactory<Integer> getxValueFactory() {
+        return xValueFactory;
+    }
+
+    public void setxValueFactory(SpinnerValueFactory<Integer> xValueFactory) {
+        this.xValueFactory = xValueFactory;
+    }
+
+    public SpinnerValueFactory<Integer> getyValueFactory() {
+        return yValueFactory;
+    }
+
+    public void setyValueFactory(SpinnerValueFactory<Integer> yValueFactory) {
+        this.yValueFactory = yValueFactory;
+    }
+
+    public SpinnerValueFactory<Integer> getWidthValueFactory() {
+        return widthValueFactory;
+    }
+
+    public void setWidthValueFactory(SpinnerValueFactory<Integer> widthValueFactory) {
+        this.widthValueFactory = widthValueFactory;
+    }
+
+    public SpinnerValueFactory<Integer> getHeightValueFactory() {
+        return heightValueFactory;
+    }
+
+    public void setHeightValueFactory(SpinnerValueFactory<Integer> heightValueFactory) {
+        this.heightValueFactory = heightValueFactory;
+    }
+
+    public SpinnerValueFactory<Integer> getResFieldValueFactory() {
+        return resFieldValueFactory;
+    }
+
+    public void setResFieldValueFactory(SpinnerValueFactory<Integer> resFieldValueFactory) {
+        this.resFieldValueFactory = resFieldValueFactory;
+    }
+
+    public SpinnerValueFactory<Integer> getResuFieldValueFactory() {
+        return resuFieldValueFactory;
+    }
+
+    public void setResuFieldValueFactory(SpinnerValueFactory<Integer> resuFieldValueFactory) {
+        this.resuFieldValueFactory = resuFieldValueFactory;
+    }
+
+    public SpinnerValueFactory<Integer> getThresFieldValueFactory() {
+        return thresFieldValueFactory;
+    }
+
+    public void setThresFieldValueFactory(SpinnerValueFactory<Integer> thresFieldValueFactory) {
+        this.thresFieldValueFactory = thresFieldValueFactory;
+    }
+
+    public Image getScreen() {
+        return screen;
+    }
+
+    public void setScreen(Image screen) {
+        this.screen = screen;
+    }
+
+    public ArrayList<BarRectangle> getBarRectangles() {
+        return barRectangles;
+    }
+
+    public void setBarRectangles(ArrayList<BarRectangle> barRectangles) {
+        this.barRectangles = barRectangles;
+    }
+
+    public ArrayList<ImageView> getImv() {
+        return imv;
+    }
+
+    public void setImv(ArrayList<ImageView> imv) {
+        this.imv = imv;
+    }
+
+    public Logic getLogic() {
+        return logic;
+    }
+
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
 }
 

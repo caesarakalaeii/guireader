@@ -1,6 +1,5 @@
 package com.guireadergui;
 
-import java.awt.image.BufferedImage;
 
 public class PercentageLogic extends LogicDecorator {
 
@@ -36,7 +35,7 @@ public class PercentageLogic extends LogicDecorator {
             //System.out.println("Pixelval:"+ currentVal[0]);
         }
 
-
+        System.out.println((i*100)/numProbes);
         return (i*100)/numProbes;
     }
 

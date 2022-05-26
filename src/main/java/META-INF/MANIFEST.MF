@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Main-Class: com.guireadergui.Launcher
+Class-Path: javafx-swing-18.0.1.jar bootstrapfx-core-0.4.0.jar toolbox-1
+ 7.0.22.jar formsfx-core-11.5.0.jar json-simple-1.1.1.jar javafx-media-1
+ 9-ea+5-win.jar javafx-fxml-18.jar validatorfx-0.3.1.jar javafx-media-19
+ -ea+5.jar javafx-graphics-18-win.jar javafx-base-18.jar javafx-base-18-
+ win.jar ikonli-core-12.3.1.jar javafx-graphics-18.jar heatmap-17.0.9.ja
+ r javafx-fxml-18-win.jar javafx-controls-18.jar javafx-swing-18.0.1-win
+ .jar javafx-web-18.jar javafx-controls-18-win.jar json-simple-1.1.jar t
+ ilesfx-17.1.9.jar javafx-web-18-win.jar ikonli-javafx-12.3.1.jar contro
+ lsfx-11.1.1.jar countries-17.0.22.jar toolboxfx-17.0.28.jar
+
