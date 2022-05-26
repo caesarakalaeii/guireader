@@ -153,13 +153,12 @@ public class GUIReaderController {
             barRectangle.yProperty().unbind();
             barRectangle.xProperty().unbind();
             barRectangle.resuProperty().unbind();
-            ReadableService serv = new ReadableService(ReadableType.BAR,xValueFactory.getValue(),
+            ReadableObject bar = ReadableFactory.newInstance(ReadableType.BAR,xValueFactory.getValue(),
                     yValueFactory.getValue(),
                     widthValueFactory.getValue(),
                     heightValueFactory.getValue(),
                     resFieldValueFactory.getValue(),
                     resuFieldValueFactory.getValue());
-            ReadableObject bar = serv.createReadableTask();
             ReadableObjManager man = new ReadableObjManager(bar);
             reader.manager.add(man);
             bar.setOnVal(Probe.getRGBArray(SwingFXUtils.fromFXImage(screen, null), bar.getProbes().get(0)));
