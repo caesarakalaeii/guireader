@@ -1,6 +1,4 @@
 package com.guireadergui;
-import javafx.beans.property.IntegerProperty;
-import javafx.scene.image.Image;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

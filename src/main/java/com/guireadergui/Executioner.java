@@ -11,7 +11,7 @@ public abstract class Executioner {
     }
 
     public void trigger(){
-
+        triggered = true;
     }
 
     public void reset(){

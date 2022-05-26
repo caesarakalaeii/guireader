@@ -35,7 +35,7 @@ public class PercentageLogic extends LogicDecorator {
             //System.out.println("Pixelval:"+ currentVal[0]);
         }
 
-        System.out.println((i*100)/numProbes);
+        //System.out.println((i*100)/numProbes);
         return (i*100)/numProbes;
     }
 

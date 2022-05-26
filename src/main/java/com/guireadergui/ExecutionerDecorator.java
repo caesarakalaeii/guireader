@@ -1,6 +1,5 @@
 package com.guireadergui;
 
-import java.io.File;
 
 public abstract class ExecutionerDecorator extends Executioner{
     Executioner ref;

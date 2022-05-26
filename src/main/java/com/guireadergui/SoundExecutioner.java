@@ -22,12 +22,21 @@ public class SoundExecutioner extends ExecutionerDecorator {
         }
     }
 
+    @Override
     public void trigger(){
         ref.trigger();
         if(!triggered){
             triggered = true;
+            super.trigger();
+            media.stop();
             media.play();
         }
 
+    }
+
+    @Override
+    public void reset(){
+        triggered = true;
+        super.reset();
     }
 }
