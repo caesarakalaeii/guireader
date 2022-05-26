@@ -1,24 +1,29 @@
 # guireader
 gui reader used to read GUIs without interfering with memory access  
 
+Project Structure:
+https://imgur.com/a/13PhufC
+Known issues:
+RGB Spinner won't set RGB
 
-Quick start guide:  DEPRECATED, will add new instructions soon  
+
+Quick start guide:  
 Download the code  
 Open in the IDE of you choice (IntelliJ is preferred by me)  
-Only File you need to edit is Main.java
-In line 65 edit the String to math the location and file which you want to be played  
-In line 105 edit the parameters, best is to screenshot the complete screen and look the pixel values up in a image editor:    
-First is the x coordinate of the object, x goes from left to right (Multimonitors are possible to use but they are a bit wierd)  
-Second is the y coordinate, y goes from up to down  
-X and Y coordinates are attributed to the top left pixel of your bar, set the object one pixel more to the right to get accurate 0% readings  
-Third is the Width of the bar you want to be read  
-Fourth is the height of the bar
-Fifth is the resolution you want to have, note that this can't be higher than your width  
-Once you edited these lines you can run the code  
 
-Upon start the program will set the RGB value representing "on" after 3secs, so be sure the coordiates are right using the displayed image.  
-The blue dots are where the RGB values are checked.  
-If none of the probe pixels have the "on" value +-10, the before set .mp3 will play  
+Upon start click on File in the top right and load both a screenshot and a soundfile.
+Then click the Button "New reader", it will show a white rectangle with dots.
+The white dots are where the RGB values are checked. 
+This is where your screen readout will happen.
+Edit the position with the X-Coord and Y-Coord spinners, as well as the width and height with the accordingly named spinners.
+The resilience spinner will declare how much the RGB value may differ from the set "on" value.
+Resolution will set the resolution of the bar, and set the dots in a regular pattern.
+Theshold will declare when the logic returns a "true".
+Once the set button is pressed the bar cannot be changed or deleted.
+It will save the RGB value of the most left or up probe as the default "on" value.
+Through the choice boxes you can build a logic analyzer, so multiple bars can be combined throu a series of simple logic parameters.
+To set the type of alert choose in the according choice box and clock "Set Alert"
+If the logic set triggers through, the before set mp3 will play.
 After it played, the program wont't play the .mp3 unless the reset button was played, this is to prevent menu changes to trigger the event  
 
 
@@ -27,6 +32,7 @@ TODO:
 ✓ Make GUI more intuitive  (better? yeah, good? no)  
 ✓ More logic to improve usability    
 ✓ Second Bar to handle Inventory opening  (as many as you like baby)  
+implement an actual Logger
 Re-add config file via JSON    
 FileChooser to load config  
 Make trigger more resilient, to avoid accidental triggers  
