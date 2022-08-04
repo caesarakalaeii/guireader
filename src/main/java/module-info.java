@@ -10,7 +10,14 @@ module com.example.guireadergui {
     requires java.desktop;
     requires javafx.swing;
     requires javafx.media;
+    requires org.jetbrains.annotations;
 
-    opens com.guireadergui to javafx.fxml;
-    exports com.guireadergui;
+    exports com.guireadergui.read;
+    opens com.guireadergui.read to javafx.fxml;
+    exports com.guireadergui.logic;
+    opens com.guireadergui.logic to javafx.fxml;
+    exports com.guireadergui.execute;
+    opens com.guireadergui.execute to javafx.fxml;
+    exports com.guireadergui.show;
+    opens com.guireadergui.show to javafx.fxml;
 }
