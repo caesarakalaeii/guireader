@@ -35,7 +35,7 @@ TODO:
 implement an actual Logger  
 Re-add config file via JSON    
 FileChooser to load config  
-Make trigger more resilient, to avoid accidental triggers  
+✓ Make trigger more resilient, to avoid accidental triggers  (Kind of, not intuitive though)
 
 Feel free to msg me on discord Caesar#4967  
 If you want to use or modify this code be sure to credit me.
