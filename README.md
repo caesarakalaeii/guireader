@@ -1,15 +1,13 @@
 # guireader
 gui reader used to read GUIs without interfering with memory access  
 
-Project Structure:
-https://imgur.com/a/13PhufC
-Known issues:
-RGB Spinner won't set RGB
+Project Structure:  
+https://imgur.com/a/wfLXmVg
 
 
-Quick start guide:  
-Download the code  
-Open in the IDE of you choice (IntelliJ is preferred by me)  
+Quick start guide:   
+Download the code   
+Open in the IDE of you choice (IntelliJ is preferred by me)   
 
 Upon start click on File in the top right and load both a screenshot and a soundfile.  
 Then click the Button "New reader", it will show a white rectangle with dots.  
@@ -35,7 +33,7 @@ TODO:
 implement an actual Logger  
 Re-add config file via JSON    
 FileChooser to load config  
-Make trigger more resilient, to avoid accidental triggers  
+✓ Make trigger more resilient, to avoid accidental triggers  (Kind of, not intuitive though)  
 
 Feel free to msg me on discord Caesar#4967  
 If you want to use or modify this code be sure to credit me.
