@@ -31,7 +31,7 @@ public class PercentageLogic extends Logic {
                 i++;
             }
         }
-
+        System.out.println((i*100)/numProbes);
         return (i*100)/numProbes;
     }
 

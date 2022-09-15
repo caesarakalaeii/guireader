@@ -15,14 +15,12 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -39,20 +37,6 @@ public class GUIReaderController {
     private VBox imageVBox;
     @FXML
     private ImageView imv4;
-    @FXML
-    private Label yLabel;
-    @FXML
-    private Label xLabel;
-    @FXML
-    private Label wLabel;
-    @FXML
-    private Label hLabel;
-    @FXML
-    private Label rLabel;
-    @FXML
-    private Label resLabel;
-    @FXML
-    private Label thrLabel;
     @FXML
     private Spinner<Integer> threshold;
 
@@ -280,7 +264,7 @@ public class GUIReaderController {
         g2d.fillRect(0, 0, copy.getWidth(), copy.getHeight());
         g2d.drawImage(tempscreen, 0, 0, null);
         g2d.dispose();
-        color = Probe.toRGBint(rValueFactory.getValue(),gValueFactory.getValue(),bValueFactory.getValue());
+        color = Probe.toRGBint(rValueFactory.getValue(),gValueFactory.getValue(),bValueFactory.getValue()); //convert RGB to int
 
         for(ModRectangle rectangle : rectangles) {
             rectangle.draw(copy, color);
@@ -356,61 +340,6 @@ public class GUIReaderController {
         this.imv4 = imv4;
     }
 
-    public Label getyLabel() {
-        return yLabel;
-    }
-
-    public void setyLabel(Label yLabel) {
-        this.yLabel = yLabel;
-    }
-
-    public Label getxLabel() {
-        return xLabel;
-    }
-
-    public void setxLabel(Label xLabel) {
-        this.xLabel = xLabel;
-    }
-
-    public Label getwLabel() {
-        return wLabel;
-    }
-
-    public void setwLabel(Label wLabel) {
-        this.wLabel = wLabel;
-    }
-
-    public Label gethLabel() {
-        return hLabel;
-    }
-
-    public void sethLabel(Label hLabel) {
-        this.hLabel = hLabel;
-    }
-
-    public Label getrLabel() {
-        return rLabel;
-    }
-
-    public void setrLabel(Label rLabel) {
-        this.rLabel = rLabel;
-    }
-
-    public Label getResLabel() {
-        return resLabel;
-    }
-
-    public void setResLabel(Label resLabel) {
-        this.resLabel = resLabel;
-    }
-
-    public Label getThrLabel() {
-        return thrLabel;
-    }
-
-    public void setThrLabel(Label thrLabel) {
-        this.thrLabel = thrLabel;
-    }
 
     public Spinner<Integer> getThreshold() {
         return threshold;

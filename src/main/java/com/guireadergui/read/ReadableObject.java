@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ReadableObject extends CaptureScreen {
-    private final ArrayList<Probe> probes;
+    private final List<Probe> probes;
     private BufferedImage img;
     private int[] onVal = new int[3];
     private int resilience;

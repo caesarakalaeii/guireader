@@ -1,7 +1,6 @@
 package com.guireadergui.read;
 
 
-import java.awt.image.BufferedImage;
 
 public class ReadableBar extends ReadableObject{
 
@@ -30,19 +29,6 @@ public class ReadableBar extends ReadableObject{
         updateProbes();
         }
 
-    public ReadableBar(int[] args) {
-        this(args[0], args[1], args[2], args[3], args[4], args[5]);
-    }
-
-
-    public BufferedImage getUpdate(){
-        updateProbes();
-        return getImg();
-    }
-
-    public void update() {
-        updateProbes();
-    }
 
 
 }

@@ -50,6 +50,7 @@ public class NumberLogic extends Logic{
     }
 
     public boolean checker(int check){
+
         return  Arrays.equals(man.getProbes().get(check).getRGBArray(), man.getOnVal());
     }
 

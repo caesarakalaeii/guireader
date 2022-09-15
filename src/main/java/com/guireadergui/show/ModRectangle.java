@@ -16,7 +16,7 @@ public abstract class  ModRectangle extends Rectangle {
 
     /**
      *
-     * @param color will be used at a later point
+     * @param color will be used in extending classes
      */
     public BufferedImage draw(BufferedImage copy, int color){
 

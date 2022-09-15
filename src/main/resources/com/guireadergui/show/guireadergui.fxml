@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+  This file is available and licensed under the following license:
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guireadergui.show.GUIReaderController">
+    <children>
+        <MenuBar prefHeight="29.0" prefWidth="1920.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Menu">
+                    <items>
+                        <MenuItem fx:id="loadMenu" mnemonicParsing="false" onAction="#loadScreen" text="Load Screen" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadSound" text="Load Sound" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#deleteLast" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#openGitHub" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <HBox fx:id="hBoxAll" layoutY="30.0" prefHeight="1050.0" prefWidth="404.0">
+            <children>
+                <VBox fx:id="imageVBox" prefHeight="1050.0" prefWidth="1717.0">
+                    <children>
+                        <ImageView fx:id="imv4" fitHeight="864.0" fitWidth="1723.0" pickOnBounds="true" preserveRatio="true" />
+                    </children>
+                </VBox>
+                <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="1047.0" prefWidth="191.0">
+                    <children>
+                        <VBox prefHeight="286.0" prefWidth="147.0">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="110.0" text="X-Coord " fx:id="xLabel">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="yLabel" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="109.0" text="Y-Coord ">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="wLabel" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="107.0" text="Width ">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="hLabel" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="107.0" text="Height ">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="rLabel" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="109.0" text="Resilience ">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="resLabel" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="108.0" text="Resolution ">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="thrLabel" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="107.0" text="Threshold ">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="patienceLabel1" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="107.0" text="Patience">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="104.0" text="R">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="103.0" text="G">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="103.0" text="B">
+                                    <font>
+                                        <Font size="17.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="logicType" prefWidth="150.0" />
+                                <ChoiceBox fx:id="executionerChoice" prefWidth="150.0" />
+                                <Button fx:id="setButton" mnemonicParsing="false" onAction="#setValues" prefHeight="25.0" prefWidth="145.0" text="New Reader" />
+                                <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetSound" prefHeight="25.0" prefWidth="138.0" text="Reset Sound" />
+                            </children>
+                        </VBox>
+                        <VBox fx:id="controlVBox" prefHeight="286.0" prefWidth="125.0">
+                            <children>
+                                <Spinner editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="28.0" prefWidth="85.0" fx:id="xField" />
+                                <Spinner fx:id="yField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="21.0" prefWidth="85.0" />
+                                <Spinner fx:id="widthField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="23.0" prefWidth="85.0" />
+                                <Spinner fx:id="heightField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="23.0" prefWidth="85.0" />
+                                <Spinner fx:id="resField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="20.0" prefWidth="85.0" />
+                                <Spinner fx:id="resuField" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="24.0" prefWidth="85.0" />
+                                <Spinner fx:id="threshold" editable="true" />
+                                <Spinner fx:id="patienceSpinner" editable="true" prefHeight="25.0" prefWidth="85.0" />
+                                <Spinner fx:id="rSpinner" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="28.0" prefWidth="85.0" />
+                                <Spinner fx:id="gSpinner" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" prefHeight="30.0" prefWidth="85.0" />
+                                <Spinner fx:id="bSpinner" editable="true" onInputMethodTextChanged="#updateAll" onKeyPressed="#updateAll" onKeyReleased="#updateAll" onKeyTyped="#updateAll" onMouseClicked="#updateAll" />
+                                <ChoiceBox fx:id="logicThreshold" prefHeight="23.0" prefWidth="85.0" />
+                                <Button fx:id="setExecutionerButton" mnemonicParsing="false" onAction="#setExecutioner" prefHeight="25.0" prefWidth="86.0" text="Set Alert" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+    </children>
+</Pane>
