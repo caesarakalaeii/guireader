@@ -15,17 +15,17 @@ public abstract class Manager extends Thread {
     Executioner e;
     boolean stop;
 
-    public void attach(LogicListener listner){
-        l.add(listner);
+    public void attach(LogicListener listener){
+        l.add(listener);
     }
 
-    public void deattach(LogicListener listner){
-        l.remove(listner);
+    public void deattach(LogicListener listener){
+        l.remove(listener);
     }
     public void update(){
         ref.updateProbes();
         for(LogicListener list : l){
-            if(list.compute()){
+            if(list.compute() && e != null){
                 e.trigger();
             }
         }

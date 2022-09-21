@@ -8,9 +8,9 @@ public abstract class Logic implements LogicListener{
     LogicEnum logicType;
 
 
-    protected Logic(ReadableObjManager man, int threshold, LogicEnum logicType, Logic comp){
+    protected Logic(ReadableObjManager man, int threshold, LogicEnum logicEnum, Logic comp){
         this.threshold = threshold;
-        this.logicType = logicType;
+        this.logicType = logicEnum;
         this.comp = comp;
         this.man = man;
         man.attach(this);

@@ -36,9 +36,9 @@ public class Probe {
     }
     public int[] getRGBArray(){
         int[] array = new int[3];
-        array[0] = pixelValue & 0xff;
+        array[2] = pixelValue & 0xff;
         array[1] = (pixelValue & 0xff00) >> 8;
-        array[2] = (pixelValue & 0xff0000) >> 16;
+        array[0] = (pixelValue & 0xff0000) >> 16;
         return array;
 
     }
