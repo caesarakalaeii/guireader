@@ -6,6 +6,7 @@ import com.guireadergui.logic.LogicEnum;
 import com.guireadergui.logic.LogicType;
 import com.guireadergui.logic.Manager;
 import com.guireadergui.logic.ReadableObjManager;
+import com.guireadergui.read.ReadableObject;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 
@@ -31,7 +32,7 @@ public class GUIReader extends Application {
     LogicType logicTypeEnum;
     LogicEnum logicEnum;
     ExecEnum execEnum;
-    ExecEnum[] execEnumArr = {ExecEnum.SOUND};
+    ExecEnum[] execEnumArr = {ExecEnum.SOUND, ExecEnum.REST};
     Manager newman;
     boolean del;
 
@@ -59,7 +60,7 @@ public class GUIReader extends Application {
         cont.getLogicThreshold().setItems(FXCollections.observableArrayList("Equals", "Smaller", "Greater"));
         cont.getLogicThreshold().getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) -> logicEnum = logicEnumArr[newValue.intValue()]);
         cont.getExecutionerChoice().setItems(FXCollections.observableArrayList(
-                "Sound"
+                "Sound", "REST"
         ));
         cont.getExecutionerChoice().getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) -> cont.setExecEnum(execEnumArr[newValue.intValue()]));
         cont.getxField().setValueFactory(cont.getxValueFactory());
@@ -81,21 +82,22 @@ public class GUIReader extends Application {
                     newman = null;
                 }
                 if (del && !manager.isEmpty()) {
-                    Manager toRemove = manager.get(manager.size() - 1);
-                    toRemove.stopThread();
-                    manager.remove(toRemove);
+                    Manager m = manager.get(0);
+                    m.deattach(m.getObjects().size()-1);
                     del = false;
                 }
                 try{
                 for (Manager man : manager) {
-                    BufferedImage img = man.getImage();
+                    for(int i = 0; i<man.getObjects().size(); i++) {
+                        BufferedImage img = man.getImage(i);
 
-                    cont.getImv().get(manager.indexOf(man)).setImage(SwingFXUtils.toFXImage(img, null));
-
+                        cont.getImv().get(i).setImage(SwingFXUtils.toFXImage(img, null));
+                    }
                 }
                     Thread.sleep(100);
                 } catch (Exception e){
                     System.err.println("Something for a logger");
+                    e.printStackTrace();
                 }
 
 

@@ -11,46 +11,80 @@ import java.util.List;
 
 public abstract class Manager extends Thread {
     List<LogicListener> l = new ArrayList<>();
-    ReadableObject ref;
+    List<ReadableObject> objects = new ArrayList<>();
     Executioner e;
     boolean stop;
+    ReadableObject temp;
+    ReadableObject tempR;
+    LogicListener tempList;
+    LogicListener tempListR;
 
     public void attach(LogicListener listener){
-        l.add(listener);
+        tempList =listener;
     }
 
     public void deattach(LogicListener listener){
-        l.remove(listener);
+        tempListR =listener;
+        tempR = objects.get(l.indexOf(listener));
     }
-    public void update(){
-        ref.updateProbes();
-        for(LogicListener list : l){
-            if(list.compute() && e != null){
-                e.trigger();
-            }
+
+    public void deattach(int index){
+        tempListR = l.get(index);
+        tempR = objects.get(index);
+    }
+    public void update(){ //if to avoid ConcurrentModificationException
+        if(temp != null){
+            objects.add(temp);
+            temp = null;
         }
+        if(tempList != null){
+            l.add(tempList);
+            tempList = null;
+        }
+        if(tempR!=null){
+            objects.remove(tempR);
+            tempR = null;
+        }
+        if(tempListR != null){
+            l.remove(tempListR);
+            tempListR = null;
+
+        }
+        for(ReadableObject ref: objects) {
+            ref.updateProbes();
+            if (computeAll() && e != null) {
+                    e.trigger();
+                }
+
+        }
+    }
+
+    public boolean computeAll(){
+        boolean prev = true;
+        for(LogicListener listener : l){
+            prev = listener.compute() && prev;
+        }
+        return prev;
     }
     public List<LogicListener> getList(){
         return l;
     }
 
 
-    public ReadableObject getRef() {
-        return ref;
-    }
-
-    public void setRef(ReadableObject ref) {
-        this.ref = ref;
+    public ReadableObject getRef(int index) {
+        return objects.get(index);
     }
 
 
-    public List<Probe> getProbes(){
-        return ref.getProbes();
+
+
+    public List<Probe> getProbes(int index){
+        return objects.get(index).getProbes();
     }
 
-    public BufferedImage getImage() {
+    public BufferedImage getImage(int index) {
         update();
-        return ref.getImg();
+        return objects.get(index).getImg();
     }
 
     public void setE(Executioner e) {
@@ -61,10 +95,23 @@ public abstract class Manager extends Thread {
     public void run(){
         while(!stop){
             update();
+            try {
+                sleep(100);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
     public void stopThread(){
         stop = true;
+    }
+
+    public List<ReadableObject> getObjects(){
+        return objects;
+    }
+
+    public void newObject(ReadableObject bar) {
+        this.temp = bar;
     }
 }

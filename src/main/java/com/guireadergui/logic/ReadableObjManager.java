@@ -7,7 +7,7 @@ public class ReadableObjManager extends Manager{
 
     public ReadableObjManager(ReadableObject ref){
         super();
-        this.ref = ref;
+        this.objects.add(ref);
         stop = false;
     }
 
@@ -15,8 +15,8 @@ public class ReadableObjManager extends Manager{
 
 
 
-    public int[] getOnVal() {
-        return ref.getOnVal();
+    public int[] getOnVal(int index) {
+        return objects.get(index).getOnVal();
     }
 
 

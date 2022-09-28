@@ -16,11 +16,11 @@ public class PercentageLogic extends Logic {
     @Override
     public int getValue() {
 
-        int numProbes = man.getProbes().size();
+        int numProbes = man.getProbes(man.getList().indexOf(this)).size();
         int i=0;
-        int res = man.getRef().getResilience();
-        int[] onVal = man.getOnVal();
-        for(Probe p : man.getProbes()){
+        int res = man.getRef(man.getList().indexOf(this)).getResilience();
+        int[] onVal = man.getOnVal(man.getList().indexOf(this));
+        for(Probe p : man.getProbes(man.getList().indexOf(this))){
             int[] currentVal = p.getRGBArray();
             if(currentVal[0] <= onVal[0]+res &&
                     currentVal[0] >= onVal[0]-res &&
@@ -31,7 +31,7 @@ public class PercentageLogic extends Logic {
                 i++;
             }
         }
-        System.out.println("Percentage: " + (i*100)/numProbes);
+        //System.out.println("Percentage: " + (i*100)/numProbes);
         return (i*100)/numProbes;
     }
 

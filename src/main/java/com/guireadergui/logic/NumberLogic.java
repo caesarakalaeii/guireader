@@ -1,5 +1,7 @@
 package com.guireadergui.logic;
 
+import com.guireadergui.read.Probe;
+
 import java.util.Arrays;
 
 public class NumberLogic extends Logic{
@@ -50,8 +52,16 @@ public class NumberLogic extends Logic{
     }
 
     public boolean checker(int check){
+        int res = man.getRef(man.getList().indexOf(this)).getResilience();
+        int[] onVal = man.getOnVal(man.getList().indexOf(this));
+        int[] currentVal = man.getRef(man.getList().indexOf(this)).getProbes().get(check).getRGBArray();
+        return(currentVal[0] <= onVal[0]+res &&
+                    currentVal[0] >= onVal[0]-res &&
+                    currentVal[1] <= onVal[1]+res &&
+                    currentVal[1] >= onVal[1]-res &&
+                    currentVal[2] <= onVal[2]+res &&
+                    currentVal[2] >= onVal[2]-res);
 
-        return  Arrays.equals(man.getProbes().get(check).getRGBArray(), man.getOnVal());
     }
 
     @Override

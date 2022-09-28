@@ -10,6 +10,7 @@ public class ExecutionerFactory {
         switch (type){
 
             case SOUND: return new SoundExecutioner(patience, ref);
+            case REST: return new RESTExecutioner(patience, ref);
             default: throw new UnsupportedOperationException("Executioner-Type not implemented");
         }
 

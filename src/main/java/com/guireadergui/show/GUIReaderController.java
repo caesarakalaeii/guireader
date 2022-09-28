@@ -103,6 +103,7 @@ public class GUIReaderController {
     private File file;
     private int color;
     private ExecEnum execEnum;
+    private ReadableObjManager man;
 
 
     public GUIReaderController (){
@@ -170,11 +171,20 @@ public class GUIReaderController {
                     heightValueFactory.getValue(),
                     resFieldValueFactory.getValue(),
                     resuFieldValueFactory.getValue());
-            ReadableObjManager man = new ReadableObjManager(bar);
+            boolean wasNull = false;
+            if(man == null) {
+                man = new ReadableObjManager(bar);
+                wasNull = true;
+            }
+            else{
+                man.newObject(bar);
+            }
             if(e!=null){
                 man.setE(e);
             }
-            reader.newMan(man);
+
+                reader.newMan(man);
+
             bar.setOnVal(Probe.getRGBArray(SwingFXUtils.fromFXImage(screen, null).getSubimage(bar.getX(),
                     bar.getY(),
                     bar.getWidth(),
@@ -185,7 +195,9 @@ public class GUIReaderController {
             imageVBox.getChildren().add(imv.get(imv.size() - 1));
 
             logic = LogicFactory.newInstance(reader.getLogicTypeEnum(), reader.getLogicEnum(), man, threshold.getValue(), logic);
-            man.start();
+            if(wasNull) {
+                man.start();
+            }
             return;
 
         }
@@ -275,7 +287,13 @@ public class GUIReaderController {
 
     @FXML
     private void resetSound(){
+        try {
+            Thread.sleep(2000);
             e.reset();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     public void setReader(GUIReader reader){

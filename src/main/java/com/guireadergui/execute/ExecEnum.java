@@ -1,4 +1,4 @@
 package com.guireadergui.execute;
 
-public enum ExecEnum {SOUND
+public enum ExecEnum {SOUND, REST
 }
