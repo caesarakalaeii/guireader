@@ -6,3 +6,6 @@ out/*
 .idea/*
 *.uxf
 
+result
+result-*
+.direnv/
